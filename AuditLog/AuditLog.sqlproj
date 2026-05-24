@@ -9,8 +9,7 @@
     <ProjectGuid>{8372f922-3426-4ca7-ba7f-c71cf291012f}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>AuditLog</RootNamespace>
     <AssemblyName>AuditLog</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
@@ -50,7 +49,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -61,15 +59,11 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Views\" />
-    <Folder Include="Security\" />
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AuditLogs.sql" />
     <Build Include="dbo\Views\vw_AuditLogs_Detailed.sql" />
-    <Build Include="Security\AuditAdministrator.sql" />
-    <Build Include="Security\BalanceITAppUser.sql" />
-    <Build Include="Security\AuditAdminUser.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAuditLogCount.sql" />
     <Build Include="dbo\Stored Procedures\sp_AuditLog_GetLogs.sql" />
     <Build Include="dbo\Stored Procedures\sp_AuditLog_GetById.sql" />
