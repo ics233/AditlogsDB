@@ -84,5 +84,9 @@ BEGIN
     FROM NumberedLogs
     ORDER BY AuditLogID DESC
     OFFSET (@Page - 1) * @PageSize ROWS
-    FETCH NEXT @PageSize ROWS ONLY;
+    FETCH NEXT @PageSize ROWS ONLY
+    -- Admin page with trivial QPS but highly variable filter params. RECOMPILE gives each call a plan
+    -- fitted to its actual parameters instead of reusing one sniffed plan — this is what caused the
+    -- intermittent 52ms-vs-30s-timeout flip on Audit/Index.
+    OPTION (RECOMPILE);
 END

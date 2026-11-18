@@ -37,3 +37,11 @@ GO
 CREATE NONCLUSTERED INDEX [IX_AuditLogs_CompanyID_Timestamp]
     ON [dbo].[AuditLogs]([CompanyID] ASC, [Timestamp] ASC);
 
+
+GO
+-- Supports sp_AuditLog_GetLogs: seek by CompanyID and read newest-first by AuditLogID with no sort,
+-- then key-lookup the wide/NVARCHAR(MAX) columns for only the page's rows. Lean key (no INCLUDEs) to
+-- stay small on the 2 GB Basic-tier DB. Replaces the full-history scan + sort that saturated DTU.
+CREATE NONCLUSTERED INDEX [IX_AuditLogs_CompanyID_AuditLogID]
+    ON [dbo].[AuditLogs]([CompanyID] ASC, [AuditLogID] DESC);
+
